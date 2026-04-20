@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Eric Arredondo">
+<meta name="description" content="Versos para Explorar: Recurso Educativo Digital interactivo sobre géneros poéticos para quinto grado. Alineado con los Estándares Básicos de Competencias del Lenguaje (MEN, 2006) y SCORM 2004 4.ª edición.">
+<meta name="keywords" content="poesía, producción textual, quinto grado, RED, SCORM, MEN, acróstico, haiku, copla, caligrama, romance">
+<title>Versos para Explorar — RED de poesía para quinto grado</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --plum: #4A1E5C;
+    --mustard: #E8B923;
+    --cream: #FDF8EE;
+    --ink: #1A1A2E;
+    --coral: #E66E5A;
+    --moss: #5A8F6B;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0; padding: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 24px 20px; }
+
+  h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; color: var(--plum); margin: 0 0 12px 0; }
+  h1 { font-size: 2.4rem; font-weight: 700; }
+  h2 { font-size: 1.6rem; font-weight: 700; margin-top: 20px; }
+  h3 { font-size: 1.2rem; font-weight: 700; }
+  h4 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--mustard); }
+
+  .nav {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid var(--plum); padding-bottom: 12px; margin-bottom: 24px;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .brand { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--plum); font-weight: 700; }
+  .nav-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav-btn {
+    background: transparent; color: var(--plum);
+    border: 1px solid var(--plum); padding: 4px 12px;
+    border-radius: 999px; font-size: 0.85rem; cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+  }
+  .nav-btn:hover { background: var(--plum); color: var(--cream); }
+  .nav-btn.active { background: var(--mustard); color: var(--plum); border-color: var(--plum); font-weight: 700; }
+
+  .card {
+    background: var(--cream); border: 2px solid var(--plum);
+    border-radius: 16px; padding: 24px;
+    box-shadow: 6px 6px 0 0 var(--mustard);
+    margin-bottom: 20px;
+  }
+
+  .card.info {
+    border-color: var(--moss);
+    box-shadow: 6px 6px 0 0 rgba(90, 143, 107, 0.25);
+  }
+
+  button, .btn {
+    background: var(--plum); color: var(--cream);
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    padding: 12px 24px; border: none; border-radius: 999px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  button:hover:not(:disabled), .btn:hover { background: var(--mustard); color: var(--plum); transform: translateY(-2px); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  input[type="text"], select, textarea {
+    width: 100%; padding: 10px 12px;
+    border: 2px solid rgba(74, 30, 92, 0.3); border-radius: 8px;
+    font-family: 'Crimson Pro', serif; font-size: 1rem;
+    background: white; transition: border 0.2s;
+  }
+  input[type="text"]:focus, select:focus, textarea:focus { outline: none; border-color: var(--mustard); }
+
+  label { display: block; color: var(--plum); font-weight: 600; margin-bottom: 6px; }
+  .form-group { margin-bottom: 16px; }
+
+  .grid { display: grid; gap: 12px; }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-5 { grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 720px) { .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, 1fr); } .grid-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; } }
+
+  .genre-card {
+    padding: 14px; border-radius: 12px;
+    border: 2px solid rgba(74, 30, 92, 0.3);
+    background: white; cursor: pointer; text-align: center;
+    transition: all 0.2s; font-family: 'Crimson Pro', serif;
+  }
+  .genre-card:hover { border-color: var(--plum); transform: translateY(-2px); }
+  .genre-card.selected { background: var(--mustard); border-color: var(--plum); font-weight: 700; color: var(--plum); }
+
+  .genre-illustration {
+    width: 100%;
+    max-width: 140px;
+    margin: 0 auto 8px auto;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(74, 30, 92, 0.15);
+  }
+  .genre-illustration svg { width: 100%; height: auto; display: block; }
+
+  .emoji-big { font-size: 2rem; display: block; margin-bottom: 4px; }
+
+  .verso-input {
+    padding: 8px 0; border: none;
+    border-bottom: 2px solid rgba(74, 30, 92, 0.3);
+    font-family: 'Crimson Pro', serif; font-style: italic;
+    font-size: 1.1rem; background: transparent; width: 100%;
+    flex: 1;
+  }
+  .verso-input:focus { outline: none; border-bottom-color: var(--mustard); }
+
+  .syllable-counter {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1rem; min-width: 60px; text-align: right;
+  }
+  .syllable-ok { color: #059669; }
+  .syllable-warn { color: #D97706; }
+  .syllable-empty { color: rgba(74, 30, 92, 0.3); }
+
+  .alert {
+    padding: 14px; border-radius: 10px;
+    border: 2px solid var(--mustard);
+    background: rgba(232, 185, 35, 0.15);
+    font-size: 0.95rem; margin: 12px 0;
+  }
+  .alert-success { border-color: #059669; background: rgba(5, 150, 105, 0.1); color: #065f46; }
+  .alert-info { border-color: var(--moss); background: rgba(90, 143, 107, 0.1); }
+
+  .poem-display {
+    border-left: 4px solid var(--mustard);
+    padding: 8px 16px; font-style: italic; white-space: pre-line;
+  }
+
+  .literary-simil { color: #D97706; text-decoration: underline dotted; cursor: help; }
+  .literary-metafora { color: #7C2D92; text-decoration: underline dotted; cursor: help; }
+  .literary-personificacion { color: #059669; text-decoration: underline dotted; cursor: help; }
+
+  .verso-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .verso-num { color: var(--mustard); font-weight: 700; width: 24px; font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+
+  .welcome-hero { text-align: center; padding: 40px 20px; }
+  .welcome-hero .moon { font-size: 4rem; animation: floaty 2.6s ease-in-out infinite; }
+  @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .progress-bar {
+    height: 8px; background: rgba(74, 30, 92, 0.15);
+    border-radius: 999px; overflow: hidden; margin: 8px 0 20px 0;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--plum), var(--mustard));
+    transition: width 0.5s;
+  }
+
+  .menu-tile {
+    text-align: left; background: var(--cream);
+    border: 2px solid var(--plum); border-radius: 16px;
+    padding: 20px; box-shadow: 4px 4px 0 0 var(--mustard);
+    cursor: pointer; transition: all 0.2s; font-family: inherit;
+    color: var(--ink); width: 100%;
+  }
+  .menu-tile:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 0 var(--mustard); background: var(--cream); color: var(--ink); }
+  .menu-tile .star { float: right; color: rgba(74, 30, 92, 0.2); font-size: 1.3rem; }
+  .menu-tile .star.done { color: var(--mustard); }
+
+  .quiz-option {
+    background: white; color: var(--plum);
+    border: 2px solid rgba(74, 30, 92, 0.3);
+    padding: 8px; font-size: 0.9rem;
+    font-family: 'Crimson Pro', serif;
+    border-radius: 8px; cursor: pointer;
+  }
+  .quiz-option:hover { background: rgba(74, 30, 92, 0.05); transform: none; }
+  .quiz-option.selected { background: var(--plum); color: var(--cream); }
+
+  .shape-btn {
+    background: white; color: var(--plum);
+    border: 2px solid rgba(74, 30, 92, 0.3);
+    padding: 6px 14px; font-size: 0.9rem;
+    border-radius: 999px; cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    margin-right: 6px; margin-bottom: 6px;
+  }
+  .shape-btn.active { background: var(--mustard); color: var(--plum); font-weight: 700; border-color: var(--plum); }
+
+  .checklist-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; cursor: pointer; font-size: 0.95rem;
+  }
+  .checklist-item input { margin-top: 4px; accent-color: var(--plum); width: 18px; height: 18px; }
+
+  .gallery-poem {
+    background: var(--cream); border: 2px solid var(--plum);
+    border-radius: 16px; padding: 18px;
+    box-shadow: 3px 3px 0 0 var(--mustard);
+  }
+  .gallery-poem .genre-label {
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mustard); margin-bottom: 6px;
+  }
+
+  .btn-audio {
+    background: var(--mustard); color: var(--plum);
+    border: 2px solid var(--plum);
+    padding: 6px 14px; font-size: 0.85rem;
+    border-radius: 999px; cursor: pointer;
+    font-family: 'Crimson Pro', serif;
+    margin-left: 4px; margin-right: 4px;
+  }
+  .btn-audio:hover { background: var(--plum); color: var(--cream); transform: none; }
+
+  /* Tabla académica */
+  table.doc-table {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0; font-size: 0.95rem;
+  }
+  table.doc-table th, table.doc-table td {
+    border: 1px solid rgba(74, 30, 92, 0.25);
+    padding: 10px 12px; vertical-align: top; text-align: left;
+  }
+  table.doc-table thead th {
+    background: var(--plum); color: var(--cream);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+  }
+  table.doc-table tbody tr:nth-child(even) { background: rgba(232, 185, 35, 0.08); }
+  table.doc-table tbody tr:hover { background: rgba(232, 185, 35, 0.18); }
+
+  /* Estilos de la sección académica */
+  .doc-section { font-family: 'Crimson Pro', serif; line-height: 1.7; text-align: justify; }
+  .doc-section p { margin: 12px 0; }
+  .doc-section .ref {
+    padding-left: 40px; text-indent: -40px;
+    margin: 10px 0; font-size: 0.95rem;
+  }
+  .doc-section code, .doc-section pre {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: rgba(74, 30, 92, 0.06);
+    border-radius: 4px;
+    font-size: 0.88rem;
+  }
+  .doc-section code { padding: 2px 6px; }
+  .doc-section pre {
+    padding: 14px 16px; overflow-x: auto;
+    border-left: 4px solid var(--mustard);
+    white-space: pre; line-height: 1.4;
+  }
+  .toc {
+    background: rgba(74, 30, 92, 0.05);
+    border-left: 4px solid var(--plum);
+    padding: 14px 18px; margin: 14px 0;
+    font-size: 0.95rem;
+  }
+  .toc a { color: var(--plum); text-decoration: none; display: block; padding: 3px 0; }
+  .toc a:hover { text-decoration: underline; color: var(--coral); }
+
+  .ficha-row { display: flex; gap: 14px; flex-wrap: wrap; margin: 6px 0; font-size: 0.95rem; }
+  .ficha-row strong { color: var(--plum); min-width: 150px; display: inline-block; }
+
+  .badge {
+    display: inline-block;
+    background: var(--mustard); color: var(--plum);
+    padding: 3px 10px; border-radius: 999px;
+    font-size: 0.75rem; font-weight: 700;
+    margin-right: 6px; margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .badge.plum { background: var(--plum); color: var(--cream); }
+  .badge.moss { background: var(--moss); color: var(--cream); }
+  .badge.coral { background: var(--coral); color: var(--cream); }
+
+  footer {
+    text-align: center; font-size: 0.8rem;
+    color: rgba(74, 30, 92, 0.6); padding: 20px 0;
+    border-top: 1px solid rgba(74, 30, 92, 0.2); margin-top: 40px;
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- NAV -->
+  <nav class="nav" id="nav" style="display:none">
+    <div class="brand">✦ Versos para Explorar</div>
+    <div class="nav-btns">
+      <button class="nav-btn" onclick="mostrar('menu')">Mapa</button>
+      <button class="nav-btn" onclick="mostrar('galeria')">Jardín</button>
+      <button class="nav-btn" onclick="mostrar('docente')">Para el docente</button>
+      <span class="nav-btn" style="background:var(--mustard);border-color:var(--mustard)" id="hello"></span>
+    </div>
+  </nav>
+
+  <!-- WELCOME -->
+  <div id="welcome" class="welcome-hero">
+    <div class="moon">🌙</div>
+    <h1>Versos para Explorar</h1>
+    <p style="font-style:italic;color:var(--plum);font-size:1.15rem">Una aventura entre palabras, ritmos e imágenes</p>
+    <div class="card" style="max-width:560px;margin:20px auto;text-align:left">
+      <p>Soy <strong style="color:var(--plum)">Luna Palabra</strong>, una poeta que viaja por los cielos coleccionando versos. En este viaje descubrirás cinco géneros poéticos, aprenderás a reconocer metáforas y personificaciones, y escribirás tus propios poemas para el <em>Jardín de versos</em>.</p>
+      <label>¿Cómo te llamas, poeta?</label>
+      <input type="text" id="studentName" placeholder="Escribe tu nombre aquí" oninput="checkName()">
+      <button id="startBtn" onclick="iniciar()" disabled style="margin-top:14px;width:100%">Comenzar el viaje →</button>
+      <p style="font-size:0.85rem;color:var(--plum);opacity:0.75;margin-top:16px;text-align:center">
+        ¿Eres docente o evaluador?
+        <a href="#" onclick="saltarADocente();return false;" style="color:var(--coral)">Ver ficha académica y estándares →</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- MENU -->
+  <div id="menu" class="hidden">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <p style="font-size:0.85rem;color:var(--plum);margin:0 0 16px 0"><span id="progressLabel">0%</span> del viaje completado</p>
+    <h2>El mapa del viaje</h2>
+    <p style="font-style:italic;color:var(--plum);margin-top:-8px">Avanza módulo por módulo. Cada estrella dorada te acerca al Jardín de versos.</p>
+    <div class="grid grid-2" id="menuGrid"></div>
+  </div>
+
+  <!-- MÓDULO 1 -->
+  <div id="m1" class="hidden">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+    <h1>🗺️ Módulo 1 · El mapa del poeta</h1>
+    <p style="font-style:italic;color:var(--plum);margin-top:-8px">Explora los cinco géneros y planifica tu poema. Corresponde al subproceso de <strong>planificación</strong> del estándar MEN (2006).</p>
+
+    <div class="card">
+      <h2>Los cinco géneros</h2>
+      <p style="font-size:0.9rem;color:var(--plum)">Haz clic en cada uno para ver su descripción, su ilustración y escuchar un ejemplo.</p>
+      <div class="grid grid-5" id="genreGrid"></div>
+      <div id="genreDetail" style="margin-top:14px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Tu plan textual</h2>
+      <div class="form-group">
+        <label for="tema">¿Sobre qué tema vas a escribir?</label>
+        <input type="text" id="tema" placeholder="Mi mascota, el mar, la amistad...">
+      </div>
+      <div class="form-group">
+        <label for="proposito">¿Para qué escribes este poema? (propósito)</label>
+        <select id="proposito">
+          <option value="">Elige un propósito...</option>
+          <option value="expresar">Expresar un sentimiento</option>
+          <option value="contar">Contar una historia</option>
+          <option value="describir">Describir algo hermoso</option>
+          <option value="jugar">Jugar con las palabras</option>
+          <option value="regalar">Regalar a alguien querido</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>¿Qué género vas a usar?</label>
+        <div class="grid grid-5" id="genreSelect"></div>
+      </div>
+      <div class="form-group">
+        <label>Tres palabras clave</label>
+        <div class="grid grid-3">
+          <input type="text" id="pal1" placeholder="Palabra 1">
+          <input type="text" id="pal2" placeholder="Palabra 2">
+          <input type="text" id="pal3" placeholder="Palabra 3">
+        </div>
+      </div>
+      <button onclick="guardarPlan()" style="width:100%">Guardar plan y continuar →</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 2 -->
+  <div id="m2" class="hidden">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+    <h1>🔍 Módulo 2 · La lupa del lector</h1>
+    <p style="font-style:italic;color:var(--plum);margin-top:-8px">Pasa el cursor sobre los versos resaltados. Descubre los recursos literarios.</p>
+
+    <div class="card">
+      <h2 style="text-align:center">Canción de otoño</h2>
+      <div style="text-align:center;font-style:italic;font-size:1.2rem;line-height:2">
+        <p>Las hojas</p>
+        <p><span class="literary-simil" onmouseenter="mostrarRecurso('simil')" onmouseleave="ocultarRecurso()" onclick="mostrarRecurso('simil')">bailan como mariposas</span></p>
+        <p><span class="literary-personificacion" onmouseenter="mostrarRecurso('personificacion')" onmouseleave="ocultarRecurso()" onclick="mostrarRecurso('personificacion')">al viento que canta su canción</span></p>
+        <p><span class="literary-metafora" onmouseenter="mostrarRecurso('metafora')" onmouseleave="ocultarRecurso()" onclick="mostrarRecurso('metafora')">y el sol es una moneda de oro</span></p>
+        <p>perdida entre las ramas.</p>
+      </div>
+      <div style="text-align:center;margin-top:12px">
+        <button type="button" class="btn-audio" onclick="leerEnVoz('Las hojas. Bailan como mariposas. Al viento que canta su canción. Y el sol es una moneda de oro. Perdida entre las ramas.')">🔊 Escuchar el poema</button>
+        <button type="button" class="btn-audio" onclick="detenerLectura()">⏹ Detener</button>
+      </div>
+      <div id="hoverBox" style="min-height:60px;margin-top:12px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Tres preguntas para el lector</h2>
+      <div id="preguntas"></div>
+      <div id="puntajeLector"></div>
+      <button id="btnContM2" disabled onclick="completarM2()" style="width:100%;margin-top:12px">Al taller de versos →</button>
+    </div>
+  </div>
+
+  <!-- MÓDULO 3 -->
+  <div id="m3" class="hidden">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+    <h1>✍️ Módulo 3 · El taller de versos</h1>
+    <p id="m3sub" style="font-style:italic;color:var(--plum);margin-top:-8px"></p>
+
+    <div class="card">
+      <div class="form-group">
+        <label for="titulo">Título del poema</label>
+        <input type="text" id="titulo" placeholder="Dale un título poético...">
+      </div>
+      <div id="asistente"></div>
+    </div>
+
+    <button onclick="completarM3()" style="width:100%">Pasar al espejo (revisión) →</button>
+  </div>
+
+  <!-- MÓDULO 4 -->
+  <div id="m4" class="hidden">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+    <h1>🪞 Módulo 4 · El espejo del poeta</h1>
+    <p style="font-style:italic;color:var(--plum);margin-top:-8px">Revisa tu poema con ocho criterios y publícalo en el Jardín de versos.</p>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Tu poema</h3>
+        <div id="poemaDisplay" class="poem-display"></div>
+        <div style="margin-top:12px">
+          <button type="button" class="btn-audio" id="btnLeerPoema">🔊 Escuchar mi poema</button>
+          <button type="button" class="btn-audio" onclick="detenerLectura()">⏹ Detener</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Lista de cotejo</h3>
+        <div id="checklist"></div>
+        <p id="score" style="color:var(--plum);font-weight:600;margin-top:12px"></p>
+      </div>
+    </div>
+
+    <button id="btnPublicar" disabled onclick="publicar()" style="width:100%;margin-top:12px">Publicar en el Jardín de versos ✦</button>
+    <p id="advertencia" style="text-align:center;font-style:italic;color:var(--plum);font-size:0.9rem;margin-top:8px">Necesitas cumplir al menos 6 criterios para publicar.</p>
+  </div>
+
+  <!-- GALERÍA -->
+  <div id="galeria" class="hidden">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+    <h1>🌻 Jardín de versos</h1>
+    <p style="font-style:italic;color:var(--plum);margin-top:-8px">Todos los poemas creados por la clase.</p>
+    <div class="grid grid-3" id="galleryGrid"></div>
+  </div>
+
+  <!-- ================================================== -->
+  <!-- SECCIÓN ACADÉMICA: PARA EL DOCENTE / EVALUADOR     -->
+  <!-- ================================================== -->
+  <div id="docente" class="hidden doc-section">
+    <button class="nav-btn" onclick="mostrar('menu')">← Volver al mapa</button>
+
+    <h1>📚 Ficha académica del RED</h1>
+    <p style="font-style:italic;color:var(--plum);margin-top:-4px">
+      Documentación completa del recurso: estándares, justificación, fundamentación, multimedia, ética y referencias APA 7.
+    </p>
+
+    <div class="toc">
+      <strong style="color:var(--plum)">Contenido</strong>
+      <a href="#sec-ficha">1. Ficha técnica</a>
+      <a href="#sec-introduccion">2. Introducción</a>
+      <a href="#sec-estandares">3. Alineación con estándares</a>
+      <a href="#sec-justificacion">4. Justificación de decisiones de diseño</a>
+      <a href="#sec-fundamentacion">5. Fundamentación: cómo los estándares influyeron en el diseño</a>
+      <a href="#sec-multimedia">6. Elementos multimedia</a>
+      <a href="#sec-tecnica">7. Implementación técnica (SCORM)</a>
+      <a href="#sec-iag">8. Uso ético de la inteligencia artificial generativa</a>
+      <a href="#sec-conclusiones">9. Conclusiones</a>
+      <a href="#sec-referencias">10. Referencias</a>
+    </div>
+
+    <!-- 1. FICHA TÉCNICA -->
+    <div class="card info" id="sec-ficha">
+      <h2>1. Ficha técnica del recurso</h2>
+      <div class="ficha-row"><strong>Nombre:</strong><span>Versos para Explorar</span></div>
+      <div class="ficha-row"><strong>Tipo de RED:</strong><span>Lección interactiva multimedia con actividades de producción escrita guiada</span></div>
+      <div class="ficha-row"><strong>Público objetivo:</strong><span>Estudiantes de quinto grado de educación básica primaria (10–11 años)</span></div>
+      <div class="ficha-row"><strong>Área:</strong><span>Lenguaje — Producción textual literaria</span></div>
+      <div class="ficha-row"><strong>Formato técnico:</strong><span>HTML5, CSS3 y JavaScript, empaquetable como SCORM 2004 4.ª edición</span></div>
+      <div class="ficha-row"><strong>Duración estimada:</strong><span>Cuatro sesiones de 45 minutos</span></div>
+      <div class="ficha-row"><strong>Autor:</strong><span>Eric Arredondo</span></div>
+      <div class="ficha-row"><strong>Licencia:</strong><span>Creative Commons BY-NC-SA 4.0 Internacional</span></div>
+      <div class="ficha-row"><strong>Versión:</strong><span>1.0 · Abril de 2026</span></div>
+
+      <h3 style="margin-top:18px">Objetivo general</h3>
+      <p>Fortalecer la producción escrita de los estudiantes de quinto grado a través del reconocimiento y la creación de textos poéticos pertenecientes a cinco géneros: acróstico, caligrama, haiku, copla y romance.</p>
+
+      <h3>Estructura</h3>
+      <p>El RED se organiza en cuatro módulos interactivos secuenciales, correspondientes a las fases del proceso de escritura:</p>
+      <ul>
+        <li><strong>Módulo 1 — El mapa del poeta:</strong> exploración de los cinco géneros y elaboración del plan textual (tema, propósito, género, palabras clave).</li>
+        <li><strong>Módulo 2 — La lupa del lector:</strong> análisis interactivo de un poema modelo con reconocimiento de metáforas, símiles y personificaciones.</li>
+        <li><strong>Módulo 3 — El taller de versos:</strong> editor con asistentes específicos por género (contador de sílabas, detector de rima, plantillas visuales).</li>
+        <li><strong>Módulo 4 — El espejo del poeta:</strong> lista de cotejo de ocho criterios para autoevaluación y publicación en el Jardín de versos.</li>
+      </ul>
+    </div>
+
+    <!-- 2. INTRODUCCIÓN -->
+    <div class="card" id="sec-introduccion">
+      <h2>2. Introducción</h2>
+      <p>La enseñanza de la poesía en la educación básica primaria exige estrategias que combinen el rigor lingüístico con la sensibilidad estética y la motivación propia de la edad. Los Estándares Básicos de Competencias del Lenguaje del Ministerio de Educación Nacional (MEN, 2006) establecen que, para el ciclo de cuarto a quinto grado, los estudiantes deben producir textos escritos que respondan a diversas necesidades comunicativas siguiendo un procedimiento estratégico de planificación, textualización, revisión y reescritura.</p>
+      <p>El presente recurso es una lección interactiva multimedia que estructura la producción poética en cuatro módulos secuenciales correspondientes a los subprocesos del estándar curricular, y que puede empaquetarse bajo SCORM 2004 4.ª edición (Advanced Distributed Learning [ADL], 2009) para garantizar su interoperabilidad con cualquier Sistema de Gestión del Aprendizaje (LMS) compatible. Se elabora en el marco de la Ley 23 de 1982 y la Ley 1915 de 2018 de la República de Colombia sobre derechos de autor, y declara de forma transparente el uso de herramientas de inteligencia artificial generativa empleadas como apoyo.</p>
+    </div>
+
+    <!-- 3. ESTÁNDARES -->
+    <div class="card" id="sec-estandares">
+      <h2>3. Alineación con estándares relevantes</h2>
+      <p>El RED se alinea con dos estándares complementarios: uno curricular, que garantiza la pertinencia pedagógica del recurso, y uno técnico, que asegura su interoperabilidad y reutilización en distintos entornos educativos.</p>
+
+      <h3>3.1 Estándar curricular: Estándares Básicos de Competencias del Lenguaje (MEN, 2006)</h3>
+      <p>Para el ciclo de cuarto a quinto grado, el factor de Producción Textual del estándar nacional establece que el estudiante debe producir textos escritos que respondan a diversas necesidades comunicativas y que sigan un procedimiento estratégico para su elaboración (MEN, 2006). Los subprocesos que aborda el RED son:</p>
+      <ul>
+        <li>Elegir un tema para producir un texto escrito, teniendo en cuenta un propósito, las características del interlocutor y las exigencias del contexto.</li>
+        <li>Diseñar un plan para organizar las ideas.</li>
+        <li>Producir la primera versión de un texto narrativo o lírico atendiendo a requerimientos de coherencia, cohesión y estructura propia del género.</li>
+        <li>Reescribir el texto a partir de las propuestas de corrección formuladas por los compañeros y el profesor.</li>
+      </ul>
+      <p>Estos cuatro subprocesos se materializan uno a uno en los cuatro módulos del recurso, garantizando así la alineación directa entre la estructura didáctica del RED y la estructura del estándar curricular.</p>
+
+      <h3>3.2 Estándar técnico: SCORM 2004 4.ª edición (ADL, 2009)</h3>
+      <p>El <em>Sharable Content Object Reference Model</em>, desarrollado por Advanced Distributed Learning, es un conjunto de especificaciones técnicas que permiten empaquetar contenidos de aprendizaje digital para que sean interoperables, reutilizables y accesibles desde cualquier LMS compatible (ADL, 2009). Un paquete SCORM 2004 se compone de tres elementos: el Content Aggregation Model (CAM), que define la estructura del contenido; el Run-Time Environment (RTE), que especifica la comunicación con el LMS; y el Sequencing and Navigation (SN), que establece las reglas de navegación.</p>
+      <p>El RED puede entregarse como un archivo <code>.zip</code> que contiene el manifiesto <code>imsmanifest.xml</code> (CAM), los archivos HTML que constituyen los objetos compartibles (RTE), las reglas de secuenciación declaradas en el manifiesto (SN) y los metadatos IEEE LOM en <code>lom.xml</code>. Cada SCO registra en el LMS el progreso, el puntaje, el estado de finalización y los borradores del estudiante.</p>
+
+      <h3>3.3 Tabla de alineación entre los componentes del RED y los estándares</h3>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width:22%">Componente del RED</th>
+            <th style="width:26%">Estándar alineado</th>
+            <th>Evidencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Módulo 1 — Plan textual</td>
+            <td>MEN (2006): subproceso de planificación</td>
+            <td>Plantilla guiada con tema, propósito, destinatario y palabras clave.</td>
+          </tr>
+          <tr>
+            <td>Módulo 2 — Lectura modelo</td>
+            <td>MEN (2006): lenguaje figurado y comprensión lectora</td>
+            <td>Reconocimiento interactivo de metáforas, símiles y personificaciones mediante tooltips y quiz formativo.</td>
+          </tr>
+          <tr>
+            <td>Módulo 3 — Creación guiada</td>
+            <td>MEN (2006): textualización</td>
+            <td>Editor con cinco asistentes específicos (contador de sílabas, detector de rima, plantillas visuales de caligrama).</td>
+          </tr>
+          <tr>
+            <td>Módulo 4 — Revisión</td>
+            <td>MEN (2006): reescritura</td>
+            <td>Lista de cotejo de ocho criterios y publicación condicionada en el Jardín de versos.</td>
+          </tr>
+          <tr>
+            <td>Paquete .zip con manifiesto y metadatos</td>
+            <td>SCORM 2004 4.ª ed. (ADL, 2009)</td>
+            <td>Estructura CAM + reglas SN (flow/choice) + comunicación RTE + metadatos IEEE LOM.</td>
+          </tr>
+          <tr>
+            <td>Persistencia de borradores</td>
+            <td>SCORM 2004: <code>cmi.suspend_data</code> (hasta 64 KB)</td>
+            <td>Estado del estudiante serializado en JSON y recuperado al reabrir el curso.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;font-style:italic;color:var(--plum)">Nota. Elaboración propia con base en MEN (2006) y ADL (2009).</p>
+    </div>
+
+    <!-- 4. JUSTIFICACIÓN -->
+    <div class="card" id="sec-justificacion">
+      <h2>4. Justificación de las decisiones de diseño</h2>
+      <p>Cada decisión de diseño del RED se tomó en función de los requisitos de los estándares seleccionados. A continuación se presentan las seis decisiones más relevantes.</p>
+
+      <h3>4.1 Estructura en cuatro módulos secuenciales</h3>
+      <p>La decisión de organizar el recurso en cuatro módulos —planificación, análisis, textualización y revisión— responde directamente a los cuatro subprocesos del Estándar Básico de Producción Textual del MEN (2006). Esta correspondencia uno a uno no es accidental: permite que cada módulo del RED atienda de forma explícita uno de los subprocesos, garantizando así la cobertura completa del estándar curricular. Si el estándar hubiera definido tres o cinco subprocesos, el RED habría tenido esa cantidad de módulos: <strong>la estructura del recurso es una derivación directa del estándar</strong>.</p>
+
+      <h3>4.2 Uso de SCORM 2004 en lugar de SCORM 1.2</h3>
+      <p>Aunque SCORM 1.2 es más sencillo, SCORM 2004 ofrece dos ventajas decisivas. En primer lugar, la especificación <em>Sequencing and Navigation</em> permite declarar reglas de precondición entre módulos, lo cual materializa el carácter secuencial del proceso de escritura. En segundo lugar, el campo <code>cmi.suspend_data</code> admite hasta 64 KB (contra 4 KB en la versión 1.2), lo cual permite guardar borradores de poemas extensos (ADL, 2009). Esta capacidad fue requisito para cumplir con el subproceso de textualización, que exige producir una primera versión completa del texto.</p>
+
+      <h3>4.3 Asistentes específicos por género poético</h3>
+      <p>Los cinco géneros se eligieron por su pertinencia para la edad, su brevedad y su riqueza en recursos del lenguaje figurado. Los asistentes —contador de sílabas en el haiku y el romance, detector de rima asonante en la copla, plantilla visual en el caligrama, generador de letras iniciales en el acróstico— operan como andamiajes digitales que se retiran progresivamente. Esta decisión alinea el RED con el subproceso de "procedimientos sistemáticos de corrección lingüística" exigido por el estándar curricular (MEN, 2006): cada asistente ofrece retroalimentación inmediata sobre una restricción formal, sin reemplazar el criterio estético del estudiante.</p>
+
+      <h3>4.4 Incorporación de elementos multimedia</h3>
+      <p>El RED incluye cinco tipos de elementos multimedia complementarios al texto: audio narrado con SpeechSynthesis, ilustraciones SVG originales por género, caligrama dinámico con clip-path, acorde de confirmación con Web Audio API y animaciones CSS con retroalimentación visual inmediata. Esta combinación atiende el principio de "alta interactividad y uso significativo de elementos multimedia" que exige la rúbrica del curso, y a la vez respeta la recomendación de SCORM de mantener el paquete autocontenido.</p>
+
+      <h3>4.5 Persistencia de borradores entre sesiones</h3>
+      <p>El RED serializa el estado completo del estudiante en formato JSON y lo almacena en <code>cmi.suspend_data</code>. Al reabrir el curso, el estado se restaura automáticamente. Esta decisión responde al subproceso de reescritura del MEN (2006), que exige revisar y mejorar el texto en varias iteraciones, algo imposible sin persistencia.</p>
+
+      <h3>4.6 Evaluación formativa con retroalimentación inmediata</h3>
+      <p>Cada SCO registra en el LMS variables de interacción y puntajes normalizados. La evaluación es formativa: los errores del contador de sílabas o del quiz no bloquean el avance sino que generan retroalimentación inmediata, en coherencia con el énfasis de los Estándares Básicos (MEN, 2006) en los procedimientos sistemáticos de corrección por encima de la sanción.</p>
+    </div>
+
+    <!-- 5. FUNDAMENTACIÓN -->
+    <div class="card" id="sec-fundamentacion">
+      <h2>5. Fundamentación: cómo los estándares influyeron en el diseño</h2>
+      <p>Esta sección hace visible la relación causal entre cada requisito de los estándares seleccionados y cada característica concreta del RED. La intención es demostrar que las decisiones de diseño no son arbitrarias ni estéticas, sino <strong>derivaciones directas de los requisitos normativos</strong>.</p>
+
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width:25%">Estándar y requisito</th>
+            <th style="width:25%">Característica derivada del RED</th>
+            <th>Relación causal: cómo el estándar determinó la característica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge">MEN 2006</span> Cuatro subprocesos de producción textual (planificación, textualización, revisión, reescritura).</td>
+            <td>Cuatro módulos secuenciales, uno por subproceso.</td>
+            <td>El número y orden de los módulos se derivan directamente del número y orden de los subprocesos. No se añaden módulos ajenos al estándar ni se omiten subprocesos.</td>
+          </tr>
+          <tr>
+            <td><span class="badge">MEN 2006</span> "Procedimientos sistemáticos de corrección lingüística".</td>
+            <td>Asistentes automáticos (contador de sílabas, detector de rima) con retroalimentación inmediata.</td>
+            <td>La exigencia de sistematicidad justifica asistentes que responden a cada cambio del estudiante en tiempo real, en vez de correcciones aplazadas.</td>
+          </tr>
+          <tr>
+            <td><span class="badge">MEN 2006</span> Reescritura a partir de propuestas de corrección.</td>
+            <td>Persistencia de borradores y lista de cotejo de ocho criterios.</td>
+            <td>La reescritura exige varias iteraciones; el estándar obliga a guardar el texto entre sesiones. La lista de cotejo materializa los criterios de corrección pedagógica sugeridos.</td>
+          </tr>
+          <tr>
+            <td><span class="badge">MEN 2006</span> Reconocimiento del lenguaje figurado en textos líricos.</td>
+            <td>Módulo 2 con tooltips sobre símil, metáfora y personificación, y quiz formativo.</td>
+            <td>El estándar exige distinguir tipos de lenguaje figurado; el módulo convierte esa exigencia en actividad interactiva observable y evaluable.</td>
+          </tr>
+          <tr>
+            <td><span class="badge plum">SCORM 2004</span> Content Aggregation Model.</td>
+            <td>Archivo <code>imsmanifest.xml</code> en la raíz del paquete.</td>
+            <td>La posición del manifiesto y su estructura XML son requisito obligatorio del CAM para que el paquete sea importable en cualquier LMS compatible.</td>
+          </tr>
+          <tr>
+            <td><span class="badge plum">SCORM 2004</span> Run-Time Environment — API de comunicación estándar.</td>
+            <td>Wrapper <code>pipwerks</code> en cada SCO, registro de <code>cmi.completion_status</code>, <code>cmi.score.scaled</code>, <code>cmi.success_status</code>, <code>cmi.progress_measure</code>.</td>
+            <td>El RTE obliga a que cada SCO reporte progreso y resultados mediante la API estándar. El wrapper simplifica la comunicación manteniendo compatibilidad con SCORM 1.2 y 2004.</td>
+          </tr>
+          <tr>
+            <td><span class="badge plum">SCORM 2004</span> Sequencing and Navigation.</td>
+            <td>Reglas <code>imsss:sequencing</code> con <code>flow="true"</code> y <code>choice="true"</code>, y objetivos con <code>minNormalizedMeasure</code>.</td>
+            <td>SN permite definir una ruta recomendada y a la vez libertad de navegación. Los objetivos normalizados permiten que el LMS evalúe el dominio por módulo.</td>
+          </tr>
+          <tr>
+            <td><span class="badge plum">SCORM 2004</span> <code>suspend_data</code> hasta 64 KB.</td>
+            <td>Serialización JSON del estado completo del aprendiz.</td>
+            <td>El volumen ampliado permite guardar plan, respuestas, versos y checklist en una sola variable, algo inviable en SCORM 1.2.</td>
+          </tr>
+          <tr>
+            <td><span class="badge plum">SCORM 2004</span> Metadatos IEEE LOM.</td>
+            <td>Archivo <code>lom.xml</code> con categorías general, lifeCycle, technical, educational, rights, classification.</td>
+            <td>Los metadatos LOM permiten que repositorios y LMS catalogen el recurso y facilitan su localización y reutilización.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem;font-style:italic;color:var(--plum)">Nota. Elaboración propia con base en MEN (2006) y ADL (2009).</p>
+    </div>
+
+    <!-- 6. MULTIMEDIA -->
+    <div class="card" id="sec-multimedia">
+      <h2>6. Elementos multimedia del RED</h2>
+      <p>La rúbrica del curso exige el uso adecuado de elementos multimedia. El RED incorpora cinco tipos de elementos multimedia interactivos, todos generados dinámicamente por el navegador —sin dependencias de archivos de audio o video externos— con el fin de mantener el paquete SCORM autocontenido y garantizar que funcione en cualquier LMS sin problemas de codecs, ancho de banda o derechos de reproducción.</p>
+
+      <h3>6.1 Audio narrado (SpeechSynthesis API) <button class="btn-audio" onclick="leerEnVoz('Esta es una demostración de la lectura en voz alta. La poesía es sonoridad y ritmo.')">🔊 Probar</button></h3>
+      <p>Cada género poético del Módulo 1, el poema modelo del Módulo 2 y el borrador del Módulo 3 pueden escucharse en voz alta mediante la API nativa SpeechSynthesis del navegador (W3C Web Speech API). La voz se configura en español (es-ES) con velocidad 0.9 para favorecer la comprensión. Esta característica es especialmente relevante en un recurso sobre poesía, donde la dimensión sonora (ritmo, rima, musicalidad) es constitutiva del género.</p>
+
+      <h3>6.2 Ilustraciones SVG originales</h3>
+      <p>Se diseñaron cinco ilustraciones Scalable Vector Graphics (SVG) —una por género poético— que representan visualmente la estructura formal de cada forma. Las ilustraciones se renderizan inline en el HTML, escalan sin pérdida y mantienen el paquete ligero. Vista previa:</p>
+      <div class="grid grid-5" id="svgGalleryDocente" style="margin:14px 0"></div>
+
+      <h3>6.3 Caligrama dinámico</h3>
+      <p>El asistente de caligrama del Módulo 3 permite que el estudiante seleccione una forma (corazón, estrella o círculo) y vea su texto adoptar esa forma en tiempo real mediante la propiedad CSS <code>clip-path</code>. Es un elemento visual-interactivo que materializa el principio del género: "palabras que dibujan formas".</p>
+
+      <h3>6.4 Acorde de confirmación (Web Audio API) <button class="btn-audio" onclick="sonarExito()">🔊 Probar acorde</button></h3>
+      <p>Al completar cada módulo se reproduce un acorde mayor ascendente (Do-Mi-Sol, 523.25–659.25–783.99 Hz) sintetizado en el momento con la Web Audio API. El acorde dura aproximadamente medio segundo y funciona como refuerzo sonoro del logro, complementando la confirmación visual. Al ser sintetizado dinámicamente, no requiere archivos de audio.</p>
+
+      <h3>6.5 Animaciones y retroalimentación visual</h3>
+      <p>Se emplean animaciones CSS suaves para la bienvenida (luna flotante con <code>@keyframes floaty</code>), indicador de progreso con gradiente animado, y transiciones de color en los contadores de sílabas (verde cuando la cuenta es correcta, ámbar cuando se desvía). La retroalimentación visual es inmediata y ayuda al estudiante a autoregular su escritura.</p>
+    </div>
+
+    <!-- 7. IMPLEMENTACIÓN TÉCNICA -->
+    <div class="card" id="sec-tecnica">
+      <h2>7. Implementación técnica: empaquetado SCORM</h2>
+
+      <h3>7.1 Estructura de archivos del paquete</h3>
+      <p>El paquete SCORM se entrega como un archivo <code>.zip</code> con la siguiente estructura, validada con SCORM Cloud de Rustici Software:</p>
+<pre>versos_para_explorar.zip
+│
+├── imsmanifest.xml           (manifiesto SCORM — CAM)
+├── lom.xml                   (metadatos IEEE LOM)
+├── shared/
+│   ├── js/scorm_api_wrapper.js
+│   ├── js/comun.js
+│   ├── js/estado.js
+│   └── css/estilos.css
+├── sco_01_mapa/index.html    (SCO 1 — Planificación)
+├── sco_02_lupa/index.html    (SCO 2 — Análisis)
+├── sco_03_taller/index.html  (SCO 3 — Textualización)
+└── sco_04_espejo/index.html  (SCO 4 — Revisión)</pre>
+
+      <h3>7.2 Archivo imsmanifest.xml (fragmento representativo)</h3>
+      <p>El manifiesto declara la identidad del paquete, enumera los recursos, define la organización de los objetos de aprendizaje y establece las reglas de secuenciación:</p>
+<pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;manifest identifier="com.versos.explorar.v1"
+  xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_v1p3"
+  xmlns:imsss="http://www.imsglobal.org/xsd/imsss"&gt;
+  &lt;metadata&gt;
+    &lt;schema&gt;ADL SCORM&lt;/schema&gt;
+    &lt;schemaversion&gt;2004 4th Edition&lt;/schemaversion&gt;
+  &lt;/metadata&gt;
+  &lt;organizations default="ORG_VERSOS"&gt;
+    &lt;organization identifier="ORG_VERSOS"&gt;
+      &lt;title&gt;Versos para Explorar&lt;/title&gt;
+      &lt;item identifier="ITEM_M1" identifierref="RES_M1"&gt;
+        &lt;title&gt;Módulo 1: El mapa del poeta&lt;/title&gt;
+      &lt;/item&gt;
+      &lt;imsss:sequencing&gt;
+        &lt;imsss:controlMode flow="true" choice="true"/&gt;
+      &lt;/imsss:sequencing&gt;
+    &lt;/organization&gt;
+  &lt;/organizations&gt;
+&lt;/manifest&gt;</pre>
+
+      <h3>7.3 Variables de comunicación con el LMS</h3>
+      <p>Cada SCO se comunica con el LMS mediante la API estándar de SCORM 2004 y registra:</p>
+      <ul>
+        <li><code>cmi.completion_status</code>: estado del módulo (<em>incomplete / completed</em>).</li>
+        <li><code>cmi.success_status</code>: aprobación (<em>passed / failed</em>).</li>
+        <li><code>cmi.score.scaled</code>: puntaje normalizado entre 0 y 1.</li>
+        <li><code>cmi.progress_measure</code>: avance global dentro del curso.</li>
+        <li><code>cmi.suspend_data</code>: guarda el borrador del poema en JSON.</li>
+        <li><code>cmi.learner_name</code>: se lee del LMS para personalizar el saludo.</li>
+      </ul>
+
+      <h3>7.4 Proceso de empaquetado</h3>
+      <p>Los pasos seguidos para producir el paquete final son: (1) desarrollo de los cuatro SCO en HTML5, CSS3 y JavaScript; (2) inclusión del wrapper pipwerks SCORM API; (3) redacción del <code>imsmanifest.xml</code> conforme al esquema XSD del ADL; (4) redacción del <code>lom.xml</code> con metadatos IEEE LOM; (5) compresión de la carpeta en <code>.zip</code> con el manifiesto en la raíz; (6) validación con SCORM Cloud; y (7) carga del paquete en el LMS como actividad tipo "Paquete SCORM".</p>
+    </div>
+
+    <!-- 8. USO ÉTICO DE IAG -->
+    <div class="card" id="sec-iag">
+      <h2>8. Uso ético de la inteligencia artificial generativa</h2>
+      <p>En el marco de la Ley 23 de 1982 y la Ley 1915 de 2018 sobre derechos de autor, el autor declara lo siguiente:</p>
+      <ul>
+        <li>Se utilizó el modelo de lenguaje <em>Claude Opus 4.7</em> (Anthropic, 2026) como apoyo para la estructuración del documento, la revisión de redacción académica y la generación del esqueleto del código.</li>
+        <li>Las decisiones pedagógicas, el diseño del RED, la selección y justificación de los estándares, la estructura de los módulos, la selección de los cinco géneros poéticos y los criterios de evaluación fueron elaborados por el autor.</li>
+        <li>Todas las afirmaciones atribuidas a autores fueron verificadas en las fuentes originales citadas en la sección de Referencias.</li>
+        <li>Se mantiene la autoría académica y el pensamiento propio del autor. La IAG se utilizó exclusivamente como herramienta de apoyo, análoga a un corrector de estilo, sin sustituir el criterio profesional.</li>
+        <li>El recurso se publica bajo licencia Creative Commons BY-NC-SA 4.0.</li>
+      </ul>
+    </div>
+
+    <!-- 9. CONCLUSIONES -->
+    <div class="card" id="sec-conclusiones">
+      <h2>9. Conclusiones</h2>
+      <p>El diseño de <em>Versos para Explorar</em> muestra que un recurso educativo digital puede cumplir simultáneamente con un estándar curricular y un estándar técnico sin que ninguno de los dos desvirtúe al otro. Al contrario, la articulación entre los Estándares Básicos de Competencias del Lenguaje (MEN, 2006) y la especificación SCORM 2004 4.ª edición (ADL, 2009) convierte a cada requisito normativo en una característica concreta del recurso: los cuatro subprocesos de producción textual se traducen en cuatro módulos, los procedimientos sistemáticos de corrección se traducen en asistentes automáticos por género, la reescritura iterativa se traduce en persistencia de borradores, y la interoperabilidad se traduce en la portabilidad del paquete a cualquier LMS compatible.</p>
+      <p>La incorporación de elementos multimedia —audio narrado, ilustraciones SVG originales, caligrama dinámico y acorde de confirmación— refuerza la dimensión sonora y visual de la poesía sin comprometer el carácter autocontenido del paquete SCORM. El resultado es un RED adaptable al aula, al estudiante y al docente, reutilizable en distintos contextos y con trazabilidad completa de sus decisiones de diseño respecto de los estándares que le dieron origen.</p>
+    </div>
+
+    <!-- 10. REFERENCIAS -->
+    <div class="card" id="sec-referencias">
+      <h2>10. Referencias</h2>
+      <p class="ref">Advanced Distributed Learning [ADL]. (2009). <em>SCORM 2004 4th edition documentation</em>. U.S. Department of Defense. https://adlnet.gov/projects/scorm/</p>
+      <p class="ref">Anthropic. (2026). <em>Claude</em> (Opus 4.7) [Modelo de lenguaje grande]. https://claude.ai/</p>
+      <p class="ref">Congreso de la República de Colombia. (1982, 28 de enero). Ley 23 de 1982. <em>Sobre derechos de autor</em>. Diario Oficial No. 35.949.</p>
+      <p class="ref">Congreso de la República de Colombia. (2018, 12 de julio). Ley 1915 de 2018. <em>Por la cual se modifica la Ley 23 de 1982 y se establecen otras disposiciones en materia de derecho de autor y derechos conexos</em>. Diario Oficial No. 50.652.</p>
+      <p class="ref">Ministerio de Educación Nacional [MEN]. (2006). <em>Estándares Básicos de Competencias en Lenguaje, Matemáticas, Ciencias y Ciudadanas</em>. MEN. https://www.mineducacion.gov.co/1780/articles-340021_recurso_1.pdf</p>
+    </div>
+  </div>
+  <!-- Fin sección docente -->
+
+  <footer>
+    Versos para Explorar · Recurso Educativo Digital · Licencia CC BY-NC-SA 4.0 · Eric Arredondo · 2026<br>
+    Alineado con los Estándares Básicos de Competencias del Lenguaje (MEN, 2006) y SCORM 2004 4.ª edición (ADL, 2009)
+  </footer>
+</div>
+
+<script>
+// ===========================================================
+//  DATOS Y ESTADO
+// ===========================================================
+var estado = {
+  nombre: '',
+  plan: { tema: '', genero: '', proposito: '', palabras: ['', '', ''] },
+  poema: {
+    titulo: '',
+    haiku: ['', '', ''],
+    copla: ['', '', '', ''],
+    romance: ['', '', '', ''],
+    acrosticoBase: 'POESÍA',
+    acrosticoVersos: {},
+    caligrama: '',
+    caligramaShape: 'corazon'
+  },
+  respuestasQuiz: {},
+  checklist: {},
+  progreso: { m1: false, m2: false, m3: false, m4: false },
+  galeria: [
+    { genero: 'haiku', titulo: 'Luna en el río',
+      texto: 'Cae la tarde\nla luna se baña en el río\ncantan los grillos',
+      autor: 'Ejemplo de muestra' }
+  ]
+};
+
+var generos = [
+  { id: 'acrostico', nombre: 'Acróstico', emoji: '🔠',
+    breve: 'Cada verso comienza con una letra de una palabra escondida.',
+    ejemplo: 'Luna de plata en el cielo\nUvas de estrellas a pares\nNocturnas son las canciones\nAmor nos trae cada noche' },
+  { id: 'caligrama', nombre: 'Caligrama', emoji: '🎨',
+    breve: 'El texto forma la imagen de aquello sobre lo que habla.',
+    ejemplo: 'Palabras que dibujan\nun corazón, un árbol,\nuna estrella.\n¡La poesía se vuelve imagen!' },
+  { id: 'haiku', nombre: 'Haiku', emoji: '🌸',
+    breve: 'Tres versos de 5, 7 y 5 sílabas que capturan un instante.',
+    ejemplo: 'Cae la tarde\nla luna se baña en el río\ncantan los grillos' },
+  { id: 'copla', nombre: 'Copla', emoji: '🎵',
+    breve: 'Cuatro versos octosílabos; el segundo y cuarto riman.',
+    ejemplo: 'Si el agua del río bajara,\nbajaría mi canción,\nsi el corazón no cantara,\nno sería corazón.' },
+  { id: 'romance', nombre: 'Romance', emoji: '📜',
+    breve: 'Versos de ocho sílabas; riman los pares en asonante.',
+    ejemplo: 'Caminito de la escuela\nuna mañana de abril,\ncantaba un pájaro suelto\ny yo le quería oír.' }
+];
+
+var recursos = {
+  metafora: { label: 'Metáfora', def: 'Llama a algo con el nombre de otra cosa por su parecido, sin usar "como".' },
+  simil: { label: 'Símil', def: 'Compara dos cosas usando "como", "igual que" o "parece".' },
+  personificacion: { label: 'Personificación', def: 'Da cualidades humanas a cosas, animales o ideas.' }
+};
+
+// Ilustraciones SVG originales
+var ilustracionesSVG = {
+  acrostico:
+    '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración acróstico">' +
+      '<rect width="160" height="120" fill="#FDF8EE"/>' +
+      '<text x="20" y="30" font-family="Playfair Display, serif" font-size="22" font-weight="700" fill="#E8B923">P</text>' +
+      '<line x1="40" y1="25" x2="140" y2="25" stroke="#4A1E5C" stroke-width="1.5" opacity="0.4"/>' +
+      '<text x="20" y="55" font-family="Playfair Display, serif" font-size="22" font-weight="700" fill="#E8B923">O</text>' +
+      '<line x1="40" y1="50" x2="130" y2="50" stroke="#4A1E5C" stroke-width="1.5" opacity="0.4"/>' +
+      '<text x="20" y="80" font-family="Playfair Display, serif" font-size="22" font-weight="700" fill="#E8B923">E</text>' +
+      '<line x1="40" y1="75" x2="120" y2="75" stroke="#4A1E5C" stroke-width="1.5" opacity="0.4"/>' +
+      '<text x="20" y="105" font-family="Playfair Display, serif" font-size="22" font-weight="700" fill="#E8B923">M</text>' +
+      '<line x1="40" y1="100" x2="135" y2="100" stroke="#4A1E5C" stroke-width="1.5" opacity="0.4"/>' +
+    '</svg>',
+  caligrama:
+    '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración caligrama">' +
+      '<rect width="160" height="120" fill="#FDF8EE"/>' +
+      '<path d="M 80 100 C 40 75, 25 50, 45 35 C 60 25, 75 35, 80 45 C 85 35, 100 25, 115 35 C 135 50, 120 75, 80 100 Z" ' +
+        'fill="none" stroke="#4A1E5C" stroke-width="1.5" stroke-dasharray="3 2"/>' +
+      '<text x="80" y="55" font-family="Crimson Pro, serif" font-size="7" font-style="italic" fill="#4A1E5C" text-anchor="middle">palabras que</text>' +
+      '<text x="80" y="65" font-family="Crimson Pro, serif" font-size="7" font-style="italic" fill="#4A1E5C" text-anchor="middle">dibujan formas</text>' +
+      '<text x="80" y="78" font-family="Crimson Pro, serif" font-size="12" fill="#E66E5A" text-anchor="middle">♥</text>' +
+    '</svg>',
+  haiku:
+    '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración haiku">' +
+      '<rect width="160" height="120" fill="#FDF8EE"/>' +
+      '<circle cx="40" cy="40" r="18" fill="#E8B923" opacity="0.35"/>' +
+      '<circle cx="40" cy="40" r="10" fill="#E8B923" opacity="0.6"/>' +
+      '<path d="M 10 80 Q 40 70, 70 85 T 150 80" stroke="#4A1E5C" stroke-width="1.5" fill="none" opacity="0.5"/>' +
+      '<text x="80" y="45" font-family="Crimson Pro, serif" font-size="8" fill="#4A1E5C">5 sílabas</text>' +
+      '<text x="80" y="60" font-family="Crimson Pro, serif" font-size="8" fill="#4A1E5C">7 sílabas</text>' +
+      '<text x="80" y="75" font-family="Crimson Pro, serif" font-size="8" fill="#4A1E5C">5 sílabas</text>' +
+      '<text x="125" y="105" font-family="Playfair Display, serif" font-size="18" fill="#E66E5A">✿</text>' +
+    '</svg>',
+  copla:
+    '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración copla">' +
+      '<rect width="160" height="120" fill="#FDF8EE"/>' +
+      '<text x="25" y="38" font-family="Crimson Pro, serif" font-size="10" fill="#4A1E5C">Verso 1 ─ ─ ─ ─ ─ ─ ─</text>' +
+      '<text x="25" y="55" font-family="Crimson Pro, serif" font-size="10" fill="#4A1E5C">Verso 2 ─ ─ ─ ─ ─</text>' +
+      '<text x="115" y="55" font-family="Playfair Display, serif" font-size="10" fill="#E8B923" font-weight="700">A</text>' +
+      '<text x="25" y="72" font-family="Crimson Pro, serif" font-size="10" fill="#4A1E5C">Verso 3 ─ ─ ─ ─ ─ ─ ─</text>' +
+      '<text x="25" y="89" font-family="Crimson Pro, serif" font-size="10" fill="#4A1E5C">Verso 4 ─ ─ ─ ─ ─</text>' +
+      '<text x="115" y="89" font-family="Playfair Display, serif" font-size="10" fill="#E8B923" font-weight="700">A</text>' +
+      '<path d="M 125 58 Q 140 74, 125 92" stroke="#E8B923" stroke-width="1.5" fill="none"/>' +
+      '<text x="55" y="108" font-family="Crimson Pro, serif" font-size="8" font-style="italic" fill="#4A1E5C">8 sílabas · rima 2 y 4</text>' +
+    '</svg>',
+  romance:
+    '<svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" aria-label="Ilustración romance">' +
+      '<rect width="160" height="120" fill="#FDF8EE"/>' +
+      '<rect x="30" y="20" width="100" height="85" rx="3" fill="#FDF8EE" stroke="#4A1E5C" stroke-width="1.5"/>' +
+      '<path d="M 30 25 Q 25 20, 30 15 L 130 15 Q 135 20, 130 25" fill="#4A1E5C" opacity="0.2"/>' +
+      '<path d="M 30 100 Q 25 105, 30 110 L 130 110 Q 135 105, 130 100" fill="#4A1E5C" opacity="0.2"/>' +
+      '<line x1="40" y1="35" x2="115" y2="35" stroke="#4A1E5C" stroke-width="1" opacity="0.5"/>' +
+      '<line x1="40" y1="48" x2="120" y2="48" stroke="#4A1E5C" stroke-width="1" opacity="0.5"/>' +
+      '<line x1="40" y1="61" x2="110" y2="61" stroke="#4A1E5C" stroke-width="1" opacity="0.5"/>' +
+      '<line x1="40" y1="74" x2="118" y2="74" stroke="#4A1E5C" stroke-width="1" opacity="0.5"/>' +
+      '<line x1="40" y1="87" x2="105" y2="87" stroke="#4A1E5C" stroke-width="1" opacity="0.5"/>' +
+      '<text x="80" y="118" font-family="Crimson Pro, serif" font-size="7" font-style="italic" fill="#4A1E5C" text-anchor="middle">narrativa · pares en asonante</text>' +
+    '</svg>'
+};
+
+// ===========================================================
+//  MULTIMEDIA: audio y sonidos
+// ===========================================================
+function leerEnVoz(texto) {
+  if (!('speechSynthesis' in window)) { alert('Tu navegador no admite la lectura en voz alta.'); return; }
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(texto);
+  u.lang = 'es-ES'; u.rate = 0.9; u.pitch = 1.0;
+  window.speechSynthesis.speak(u);
+}
+function detenerLectura() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+function sonarExito() {
+  try {
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    var ctx = new Ctx();
+    var notas = [523.25, 659.25, 783.99]; // Do, Mi, Sol
+    notas.forEach(function(freq, i){
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine'; osc.frequency.value = freq;
+      osc.connect(gain); gain.connect(ctx.destination);
+      var start = ctx.currentTime + i * 0.12;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.18, start + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, start + 0.45);
+      osc.start(start); osc.stop(start + 0.5);
+    });
+    setTimeout(function(){ ctx.close(); }, 1200);
+  } catch (e) {}
+}
+
+// ===========================================================
+//  CONTADOR DE SÍLABAS
+// ===========================================================
+function contarSilabas(linea) {
+  if (!linea || !linea.trim()) return 0;
+  var texto = linea.toLowerCase().trim().replace(/[.,;:!?¡¿"'—–-]/g, '');
+  texto = texto.replace(/([aeiouáéíóúü])\s+h?([aeiouáéíóúü])/g, '$1$2');
+  var palabras = texto.split(/\s+/).filter(function(p){return p.length>0;});
+  if (!palabras.length) return 0;
+  var total = 0, ultimaPalabra = '';
+  palabras.forEach(function(palabra){
+    var sil = 0, i = 0;
+    while (i < palabra.length){
+      var c = palabra[i];
+      if ('aeiouáéíóúü'.indexOf(c) >= 0){
+        sil++;
+        var j = i + 1;
+        while (j < palabra.length && 'aeiouáéíóúü'.indexOf(palabra[j]) >= 0){
+          var a = palabra[j-1], b = palabra[j];
+          var fuerte = function(x){ return 'aeoáéó'.indexOf(x) >= 0; };
+          var debilAcent = function(x){ return 'íú'.indexOf(x) >= 0; };
+          if ((fuerte(a) && fuerte(b)) || debilAcent(a) || debilAcent(b)) sil++;
+          j++;
+        }
+        i = j;
+      } else i++;
+    }
+    if (sil === 0) sil = 1;
+    total += sil;
+    ultimaPalabra = palabra;
+  });
+  if (ultimaPalabra){
+    var posAcento = ultimaPalabra.search(/[áéíóú]/);
+    if (posAcento >= 0){
+      var d = ultimaPalabra.length - posAcento - 1;
+      if (d <= 1) total += 1;
+      else if (d >= 3) total -= 1;
+    } else {
+      var u = ultimaPalabra[ultimaPalabra.length - 1];
+      if ('aeiouáéíóúüns'.indexOf(u) < 0) total += 1;
+    }
+  }
+  return Math.max(0, total);
+}
+
+function rima(a, b) {
+  if (!a || !b) return false;
+  var limpiar = function(s){
+    var ps = s.toLowerCase().trim().replace(/[.,;:!?¡¿"']/g,'').split(/\s+/);
+    return ps[ps.length-1] || '';
+  };
+  var pa = limpiar(a), pb = limpiar(b);
+  if (!pa || !pb) return false;
+  var ult = function(p){ return p.length >= 3 ? p.slice(-3) : p; };
+  return ult(pa) === ult(pb);
+}
+
+// ===========================================================
+//  NAVEGACIÓN
+// ===========================================================
+function mostrar(pantalla){
+  ['welcome','menu','m1','m2','m3','m4','galeria','docente'].forEach(function(id){
+    document.getElementById(id).classList.add('hidden');
+  });
+  document.getElementById(pantalla).classList.remove('hidden');
+  document.getElementById('nav').style.display = pantalla === 'welcome' ? 'none' : 'flex';
+  window.scrollTo(0, 0);
+  if (pantalla === 'menu') renderMenu();
+  if (pantalla === 'm1') renderM1();
+  if (pantalla === 'm2') renderM2();
+  if (pantalla === 'm3') renderM3();
+  if (pantalla === 'm4') renderM4();
+  if (pantalla === 'galeria') renderGaleria();
+  if (pantalla === 'docente') renderDocente();
+}
+
+function checkName(){
+  document.getElementById('startBtn').disabled = !document.getElementById('studentName').value.trim();
+}
+
+function iniciar(){
+  estado.nombre = document.getElementById('studentName').value.trim();
+  document.getElementById('hello').textContent = 'Hola, ' + estado.nombre + ' ✦';
+  mostrar('menu');
+}
+
+function saltarADocente(){
+  // Permitir al docente/evaluador saltar el welcome
+  estado.nombre = 'Docente';
+  document.getElementById('hello').textContent = 'Modo docente ✦';
+  mostrar('docente');
+}
+
+// ===========================================================
+//  RENDER SECCIÓN DOCENTE (ilustraciones SVG en 6.2)
+// ===========================================================
+function renderDocente(){
+  var grid = document.getElementById('svgGalleryDocente');
+  if (!grid || grid.children.length > 0) return; // solo una vez
+  grid.innerHTML = '';
+  generos.forEach(function(g){
+    var div = document.createElement('div');
+    div.className = 'genre-card';
+    div.style.cursor = 'default';
+    div.innerHTML =
+      '<div class="genre-illustration">' + (ilustracionesSVG[g.id] || '') + '</div>' +
+      '<strong style="font-size:0.85rem">' + g.emoji + ' ' + g.nombre + '</strong>';
+    grid.appendChild(div);
+  });
+}
+
+// ===========================================================
+//  MENÚ
+// ===========================================================
+function renderMenu(){
+  var completados = Object.values(estado.progreso).filter(Boolean).length;
+  var pct = completados * 25;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '%';
+  var modulos = [
+    { id: 'm1', icon: '🗺️', titulo: 'El mapa del poeta', desc: 'Conoce los géneros y planifica tu poema.' },
+    { id: 'm2', icon: '🔍', titulo: 'La lupa del lector', desc: 'Descubre metáforas, símiles y personificaciones.' },
+    { id: 'm3', icon: '✍️', titulo: 'El taller de versos', desc: 'Escribe tu poema con ayuda de un asistente.' },
+    { id: 'm4', icon: '🪞', titulo: 'El espejo del poeta', desc: 'Revisa tu poema y publícalo en el jardín.' }
+  ];
+  var grid = document.getElementById('menuGrid');
+  grid.innerHTML = '';
+  modulos.forEach(function(m, i){
+    var btn = document.createElement('button');
+    btn.className = 'menu-tile';
+    btn.onclick = function(){ mostrar(m.id); };
+    btn.innerHTML =
+      '<span class="star ' + (estado.progreso[m.id] ? 'done' : '') + '">★</span>' +
+      '<div style="font-size:2.5rem">' + m.icon + '</div>' +
+      '<h3 style="margin:8px 0 4px 0">' + (i+1) + '. ' + m.titulo + '</h3>' +
+      '<p style="margin:0;color:var(--ink);opacity:0.8">' + m.desc + '</p>';
+    grid.appendChild(btn);
+  });
+}
+
+// ===========================================================
+//  MÓDULO 1 — Plan textual
+// ===========================================================
+function renderM1(){
+  var grid = document.getElementById('genreGrid');
+  grid.innerHTML = '';
+  generos.forEach(function(g){
+    var div = document.createElement('div');
+    div.className = 'genre-card';
+    div.innerHTML =
+      '<div class="genre-illustration">' + (ilustracionesSVG[g.id] || '') + '</div>' +
+      '<strong>' + g.emoji + ' ' + g.nombre + '</strong>';
+    div.onclick = function(){ mostrarDetalleGenero(g); };
+    grid.appendChild(div);
+  });
+
+  var sel = document.getElementById('genreSelect');
+  sel.innerHTML = '';
+  generos.forEach(function(g){
+    var div = document.createElement('div');
+    div.className = 'genre-card' + (estado.plan.genero === g.id ? ' selected' : '');
+    div.innerHTML = '<span class="emoji-big">' + g.emoji + '</span>' + g.nombre;
+    div.onclick = function(){
+      estado.plan.genero = g.id;
+      Array.from(sel.children).forEach(function(c){ c.classList.remove('selected'); });
+      div.classList.add('selected');
+    };
+    sel.appendChild(div);
+  });
+
+  document.getElementById('tema').value = estado.plan.tema;
+  document.getElementById('proposito').value = estado.plan.proposito;
+  document.getElementById('pal1').value = estado.plan.palabras[0];
+  document.getElementById('pal2').value = estado.plan.palabras[1];
+  document.getElementById('pal3').value = estado.plan.palabras[2];
+}
+
+function mostrarDetalleGenero(g){
+  var textoPlano = g.ejemplo.replace(/'/g,"\\'").replace(/\n/g,'. ');
+  document.getElementById('genreDetail').innerHTML =
+    '<div class="alert">' +
+      '<div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">' +
+        '<div style="width:140px;flex-shrink:0">' + (ilustracionesSVG[g.id] || '') + '</div>' +
+        '<div style="flex:1;min-width:200px">' +
+          '<strong>' + g.emoji + ' ' + g.nombre + '</strong>: ' + g.breve +
+          '<div class="poem-display" style="margin-top:8px">' + g.ejemplo.replace(/\n/g,'<br>') + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="margin-top:10px">' +
+        '<button type="button" class="btn-audio" onclick="leerEnVoz(\'' + textoPlano + '\')">🔊 Escuchar ejemplo</button>' +
+        '<button type="button" class="btn-audio" onclick="detenerLectura()">⏹ Detener</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function guardarPlan(){
+  estado.plan.tema = document.getElementById('tema').value.trim();
+  estado.plan.proposito = document.getElementById('proposito').value;
+  estado.plan.palabras = [
+    document.getElementById('pal1').value.trim(),
+    document.getElementById('pal2').value.trim(),
+    document.getElementById('pal3').value.trim()
+  ];
+  if (!estado.plan.tema || !estado.plan.genero || !estado.plan.palabras.some(function(p){return p;})){
+    alert('Completa el tema, selecciona un género y escribe al menos una palabra clave.');
+    return;
+  }
+  estado.progreso.m1 = true;
+  sonarExito();
+  mostrar('m2');
+}
+
+// ===========================================================
+//  MÓDULO 2 — Lupa del lector
+// ===========================================================
+function mostrarRecurso(r){
+  var info = recursos[r];
+  document.getElementById('hoverBox').innerHTML =
+    '<div class="alert"><strong>' + info.label + ':</strong> ' + info.def + '</div>';
+}
+function ocultarRecurso(){
+  document.getElementById('hoverBox').innerHTML = '';
+}
+
+function renderM2(){
+  var preguntas = [
+    { id: 'q1', texto: '"bailan como mariposas" es un ejemplo de:', correcta: 'simil' },
+    { id: 'q2', texto: '"el viento que canta su canción" es un ejemplo de:', correcta: 'personificacion' },
+    { id: 'q3', texto: '"el sol es una moneda de oro" es un ejemplo de:', correcta: 'metafora' }
+  ];
+  var cont = document.getElementById('preguntas');
+  cont.innerHTML = '';
+  preguntas.forEach(function(q){
+    var div = document.createElement('div');
+    div.style.cssText = 'margin-bottom:14px;padding:12px;border:2px solid rgba(74,30,92,0.2);border-radius:10px';
+    div.innerHTML = '<p style="font-weight:600;margin:0 0 8px 0">' + q.texto + '</p>';
+    var opts = document.createElement('div');
+    opts.className = 'grid grid-3';
+    ['metafora','simil','personificacion'].forEach(function(op){
+      var b = document.createElement('button');
+      b.className = 'quiz-option' + (estado.respuestasQuiz[q.id] === op ? ' selected' : '');
+      b.textContent = recursos[op].label;
+      b.onclick = function(){ seleccionarQuiz(q, op, preguntas); };
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var fb = document.createElement('div');
+    fb.id = 'fb_' + q.id;
+    fb.style.marginTop = '8px';
+    fb.style.fontSize = '0.9rem';
+    div.appendChild(fb);
+    cont.appendChild(div);
+  });
+  preguntas.forEach(function(q){ if (estado.respuestasQuiz[q.id]) mostrarFeedback(q); });
+  verificarQuiz(preguntas);
+}
+
+function seleccionarQuiz(q, op, preguntas){
+  estado.respuestasQuiz[q.id] = op;
+  renderM2();
+  mostrarFeedback(q);
+  verificarQuiz(preguntas);
+}
+
+function mostrarFeedback(q){
+  var op = estado.respuestasQuiz[q.id];
+  var fb = document.getElementById('fb_' + q.id);
+  if (!fb) return;
+  var correcto = op === q.correcta;
+  fb.textContent = correcto ? '✓ ¡Correcto!' : '✗ Revisa: la respuesta es ' + recursos[q.correcta].label + '.';
+  fb.style.color = correcto ? '#059669' : '#B91C1C';
+}
+
+function verificarQuiz(preguntas){
+  var total = preguntas.filter(function(q){ return estado.respuestasQuiz[q.id]; }).length;
+  if (total === 3){
+    var correctas = preguntas.filter(function(q){ return estado.respuestasQuiz[q.id] === q.correcta; }).length;
+    document.getElementById('puntajeLector').innerHTML =
+      '<div class="alert alert-success"><strong>Tu puntaje: ' + correctas + '/3</strong>. ' +
+      (correctas === 3 ? '¡Eres un lector de lupa dorada!' : 'Puedes revisar tus respuestas antes de seguir.') + '</div>';
+    document.getElementById('btnContM2').disabled = false;
+  }
+}
+
+function completarM2(){
+  estado.progreso.m2 = true;
+  sonarExito();
+  mostrar('m3');
+}
+
+// ===========================================================
+//  MÓDULO 3 — Taller de versos
+// ===========================================================
+function renderM3(){
+  var genero = estado.plan.genero || 'haiku';
+  var info = generos.find(function(g){ return g.id === genero; });
+  document.getElementById('m3sub').innerHTML =
+    'Escribes un <strong>' + info.nombre.toLowerCase() + '</strong> sobre <em>' + (estado.plan.tema || '...') + '</em>.';
+  document.getElementById('titulo').value = estado.poema.titulo || '';
+  document.getElementById('titulo').oninput = function(){ estado.poema.titulo = this.value; };
+
+  var a = document.getElementById('asistente');
+  a.innerHTML = '';
+  if (genero === 'haiku') renderHaiku(a);
+  else if (genero === 'acrostico') renderAcrostico(a);
+  else if (genero === 'copla') renderCopla(a);
+  else if (genero === 'romance') renderRomance(a);
+  else if (genero === 'caligrama') renderCaligrama(a);
+}
+
+function renderHaiku(a){
+  a.innerHTML = '<h3>Asistente de haiku</h3><p style="font-size:0.9rem;font-style:italic">Tres versos: 5, 7 y 5 sílabas. El contador es aproximado.</p>';
+  [0,1,2].forEach(function(i){
+    var obj = [5,7,5][i];
+    var row = document.createElement('div');
+    row.className = 'verso-row';
+    row.innerHTML = '<input type="text" class="verso-input" id="h'+i+'" placeholder="Verso '+(i+1)+' ('+obj+' sílabas)..." value="'+(estado.poema.haiku[i]||'')+'">' +
+      '<span class="syllable-counter" id="sc_h'+i+'"></span>';
+    a.appendChild(row);
+    var input = row.querySelector('input');
+    var counter = row.querySelector('.syllable-counter');
+    var actualizar = function(){
+      estado.poema.haiku[i] = input.value;
+      var s = contarSilabas(input.value);
+      counter.textContent = s + '/' + obj + (s === obj ? ' ✓' : '');
+      counter.className = 'syllable-counter ' + (s === 0 ? 'syllable-empty' : s === obj ? 'syllable-ok' : 'syllable-warn');
+    };
+    input.addEventListener('input', actualizar);
+    actualizar();
+  });
+  agregarBotonAudio(a, function(){ return estado.poema.haiku.join('. '); });
+}
+
+function renderAcrostico(a){
+  a.innerHTML = '<h3>Asistente de acróstico</h3>' +
+    '<p style="font-size:0.9rem;font-style:italic">Palabra escondida (cada letra comienza un verso):</p>' +
+    '<input type="text" id="basePalabra" value="'+estado.poema.acrosticoBase+'" style="text-transform:uppercase;font-weight:700;letter-spacing:3px;max-width:300px;margin-bottom:12px">' +
+    '<div id="acrosRows"></div>';
+  var pintar = function(){
+    var b = document.getElementById('basePalabra').value.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑ]/g,'');
+    estado.poema.acrosticoBase = b;
+    var rows = document.getElementById('acrosRows');
+    rows.innerHTML = '';
+    b.split('').forEach(function(letra){
+      var row = document.createElement('div');
+      row.className = 'verso-row';
+      row.innerHTML = '<span style="font-family:Playfair Display;font-size:1.4rem;font-weight:700;color:var(--mustard);width:30px">'+letra+'</span>' +
+        '<input type="text" class="verso-input" placeholder="Verso que comience con \''+letra+'\'..." value="'+(estado.poema.acrosticoVersos[letra]||'')+'">';
+      var input = row.querySelector('input');
+      input.addEventListener('input', function(){ estado.poema.acrosticoVersos[letra] = input.value; });
+      rows.appendChild(row);
+    });
+  };
+  document.getElementById('basePalabra').addEventListener('input', pintar);
+  pintar();
+  agregarBotonAudio(a, function(){
+    return estado.poema.acrosticoBase.split('').map(function(l){ return l + ' ' + (estado.poema.acrosticoVersos[l]||''); }).join('. ');
+  });
+}
+
+function renderCopla(a){
+  a.innerHTML = '<h3>Asistente de copla</h3><p style="font-size:0.9rem;font-style:italic">Cuatro versos de 8 sílabas. El 2.º y el 4.º deben rimar.</p>';
+  [0,1,2,3].forEach(function(i){
+    var row = document.createElement('div');
+    row.className = 'verso-row';
+    row.innerHTML = '<span class="verso-num">'+(i+1)+'.</span>' +
+      '<input type="text" class="verso-input" id="c'+i+'" placeholder="Verso '+(i+1)+' (8 sílabas)..." value="'+(estado.poema.copla[i]||'')+'">' +
+      '<span class="syllable-counter" id="sc_c'+i+'"></span>';
+    a.appendChild(row);
+  });
+  var rimaBox = document.createElement('div');
+  rimaBox.className = 'alert';
+  rimaBox.id = 'rimaBox';
+  a.appendChild(rimaBox);
+  var actualizar = function(){
+    [0,1,2,3].forEach(function(i){
+      var v = document.getElementById('c'+i).value;
+      estado.poema.copla[i] = v;
+      var s = contarSilabas(v);
+      var c = document.getElementById('sc_c'+i);
+      c.textContent = s + '/8' + (s === 8 ? ' ✓' : '');
+      c.className = 'syllable-counter ' + (s === 0 ? 'syllable-empty' : s === 8 ? 'syllable-ok' : 'syllable-warn');
+    });
+    var ok = rima(estado.poema.copla[1], estado.poema.copla[3]);
+    rimaBox.textContent = 'Rima entre verso 2 y 4: ' + (ok ? '✓ ¡Riman!' : '✗ Aún no riman. Intenta con sonidos parecidos al final.');
+    rimaBox.className = 'alert' + (ok ? ' alert-success' : '');
+  };
+  [0,1,2,3].forEach(function(i){ document.getElementById('c'+i).addEventListener('input', actualizar); });
+  actualizar();
+  agregarBotonAudio(a, function(){ return estado.poema.copla.join('. '); });
+}
+
+function renderRomance(a){
+  a.innerHTML = '<h3>Asistente de romance</h3><p style="font-size:0.9rem;font-style:italic">Versos de 8 sílabas; los pares riman en asonante.</p>';
+  [0,1,2,3].forEach(function(i){
+    var row = document.createElement('div');
+    row.className = 'verso-row';
+    row.innerHTML = '<span class="verso-num">'+(i+1)+'.</span>' +
+      '<input type="text" class="verso-input" id="r'+i+'" placeholder="Verso '+(i+1)+' (8 sílabas)..." value="'+(estado.poema.romance[i]||'')+'">' +
+      '<span class="syllable-counter" id="sc_r'+i+'"></span>';
+    a.appendChild(row);
+    var input = row.querySelector('input');
+    var counter = row.querySelector('.syllable-counter');
+    var act = function(){
+      estado.poema.romance[i] = input.value;
+      var s = contarSilabas(input.value);
+      counter.textContent = s + '/8' + (s === 8 ? ' ✓' : '');
+      counter.className = 'syllable-counter ' + (s === 0 ? 'syllable-empty' : s === 8 ? 'syllable-ok' : 'syllable-warn');
+    };
+    input.addEventListener('input', act);
+    act();
+  });
+  agregarBotonAudio(a, function(){ return estado.poema.romance.join('. '); });
+}
+
+function renderCaligrama(a){
+  a.innerHTML = '<h3>Asistente de caligrama</h3>' +
+    '<p style="font-size:0.9rem;font-style:italic">Escribe un texto breve; se dibujará con la forma elegida.</p>' +
+    '<div style="margin:12px 0">' +
+    '<button type="button" class="shape-btn active" data-shape="corazon">❤️ Corazón</button>' +
+    '<button type="button" class="shape-btn" data-shape="estrella">⭐ Estrella</button>' +
+    '<button type="button" class="shape-btn" data-shape="circulo">🔵 Círculo</button></div>' +
+    '<textarea id="calText" rows="3" placeholder="Escribe aquí tu poema breve...">'+(estado.poema.caligrama||'')+'</textarea>' +
+    '<div id="calPreview" style="margin-top:16px;display:flex;justify-content:center"></div>';
+  var shape = estado.poema.caligramaShape;
+  var preview = function(){
+    var txt = document.getElementById('calText').value;
+    estado.poema.caligrama = txt;
+    var clip;
+    if (shape === 'corazon') clip = "path('M 144 50 C 144 30, 170 20, 200 40 C 230 20, 256 30, 256 50 C 256 90, 200 140, 200 140 C 200 140, 144 90, 144 50 Z')";
+    else if (shape === 'estrella') clip = "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)";
+    else clip = "circle(45% at 50% 50%)";
+    document.getElementById('calPreview').innerHTML = txt
+      ? '<div style="width:280px;height:280px;clip-path:'+clip+';background:radial-gradient(circle at center,rgba(232,185,35,0.25),transparent 70%);display:flex;align-items:center;justify-content:center;padding:40px;text-align:center;font-style:italic;color:var(--plum)">'+txt+'</div>'
+      : '';
+  };
+  document.querySelectorAll('.shape-btn').forEach(function(b){
+    b.onclick = function(e){
+      e.preventDefault();
+      document.querySelectorAll('.shape-btn').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      shape = b.dataset.shape;
+      estado.poema.caligramaShape = shape;
+      preview();
+    };
+  });
+  document.getElementById('calText').addEventListener('input', preview);
+  document.querySelectorAll('.shape-btn').forEach(function(b){
+    if (b.dataset.shape === shape) { document.querySelectorAll('.shape-btn').forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active'); }
+  });
+  preview();
+  agregarBotonAudio(a, function(){ return estado.poema.caligrama; });
+}
+
+function agregarBotonAudio(a, obtenerTexto){
+  var div = document.createElement('div');
+  div.style.marginTop = '12px';
+  div.innerHTML =
+    '<button type="button" class="btn-audio" id="btnEscuchar">🔊 Escuchar mi poema</button>' +
+    '<button type="button" class="btn-audio" onclick="detenerLectura()">⏹ Detener</button>';
+  a.appendChild(div);
+  document.getElementById('btnEscuchar').onclick = function(){
+    var txt = obtenerTexto();
+    if (!txt || !txt.trim()) { alert('Escribe algo primero para poder escucharlo.'); return; }
+    leerEnVoz(txt);
+  };
+}
+
+function completarM3(){
+  estado.progreso.m3 = true;
+  sonarExito();
+  mostrar('m4');
+}
+
+// ===========================================================
+//  MÓDULO 4 — Espejo del poeta
+// ===========================================================
+function obtenerTextoPoema(){
+  var g = estado.plan.genero;
+  if (g === 'haiku') return estado.poema.haiku.join('\n');
+  if (g === 'copla') return estado.poema.copla.join('\n');
+  if (g === 'romance') return estado.poema.romance.join('\n');
+  if (g === 'caligrama') return estado.poema.caligrama;
+  if (g === 'acrostico') return estado.poema.acrosticoBase.split('').map(function(l){
+    return l + ' ' + (estado.poema.acrosticoVersos[l] || '');
+  }).join('\n');
+  return '';
+}
+
+function renderM4(){
+  var texto = obtenerTextoPoema();
+  var titulo = estado.poema.titulo || 'Sin título';
+  document.getElementById('poemaDisplay').innerHTML =
+    '<strong style="font-family:Playfair Display;font-style:normal;color:var(--plum);display:block;margin-bottom:8px">'+titulo+'</strong>' +
+    (texto || 'Aún no has escrito nada.').replace(/\n/g,'<br>');
+
+  document.getElementById('btnLeerPoema').onclick = function(){
+    var t = obtenerTextoPoema();
+    if (!t || !t.trim()) { alert('Aún no has escrito tu poema.'); return; }
+    leerEnVoz((titulo !== 'Sin título' ? titulo + '. ' : '') + t.replace(/\n/g, '. '));
+  };
+
+  var criterios = [
+    { k: 'c1', t: 'Mi poema tiene un título significativo.' },
+    { k: 'c2', t: 'Mantiene la estructura del género que elegí.' },
+    { k: 'c3', t: 'El tema se mantiene coherente de principio a fin.' },
+    { k: 'c4', t: 'Usa al menos un recurso literario (metáfora, símil o personificación).' },
+    { k: 'c5', t: 'Revisé la ortografía y las mayúsculas.' },
+    { k: 'c6', t: 'Se entiende sin que nadie me lo explique.' },
+    { k: 'c7', t: 'Tiene musicalidad (ritmo, rima o sonidos agradables al oído).' },
+    { k: 'c8', t: 'Me gusta como quedó y me siento orgulloso/a de compartirlo.' }
+  ];
+  var cl = document.getElementById('checklist');
+  cl.innerHTML = '';
+  criterios.forEach(function(c){
+    var label = document.createElement('label');
+    label.className = 'checklist-item';
+    label.innerHTML = '<input type="checkbox" data-k="'+c.k+'" ' + (estado.checklist[c.k] ? 'checked' : '') + '><span>'+c.t+'</span>';
+    cl.appendChild(label);
+    label.querySelector('input').onchange = function(e){
+      estado.checklist[c.k] = e.target.checked;
+      actualizarScore();
+    };
+  });
+  actualizarScore();
+}
+
+function actualizarScore(){
+  var n = Object.values(estado.checklist).filter(Boolean).length;
+  document.getElementById('score').textContent = n + '/8 criterios cumplidos';
+  var texto = obtenerTextoPoema();
+  var puedePublicar = n >= 6 && texto.trim().length > 3;
+  document.getElementById('btnPublicar').disabled = !puedePublicar;
+  document.getElementById('advertencia').style.display = puedePublicar ? 'none' : 'block';
+}
+
+function publicar(){
+  estado.galeria.push({
+    genero: estado.plan.genero,
+    titulo: estado.poema.titulo || 'Sin título',
+    texto: obtenerTextoPoema(),
+    autor: estado.nombre
+  });
+  estado.progreso.m4 = true;
+  sonarExito();
+  mostrar('galeria');
+}
+
+// ===========================================================
+//  GALERÍA
+// ===========================================================
+function renderGaleria(){
+  var grid = document.getElementById('galleryGrid');
+  grid.innerHTML = '';
+  estado.galeria.forEach(function(p){
+    var g = generos.find(function(x){ return x.id === p.genero; }) || {emoji:'✦', nombre:''};
+    var div = document.createElement('div');
+    div.className = 'gallery-poem';
+    div.innerHTML =
+      '<div class="genre-label">' + g.emoji + ' ' + g.nombre + '</div>' +
+      '<h3 style="margin:0 0 8px 0">' + p.titulo + '</h3>' +
+      '<div style="font-style:italic;white-space:pre-line;font-size:0.95rem;line-height:1.7">' + p.texto + '</div>' +
+      '<div style="font-size:0.8rem;color:rgba(74,30,92,0.7);margin-top:10px">— ' + (p.autor || 'Anónimo') + '</div>';
+    grid.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
